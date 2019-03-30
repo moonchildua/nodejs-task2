@@ -1,0 +1,28 @@
+version: "3"
+services:
+  nginx:
+    build: nginx/.
+    ports:
+      - 80:80
+    links:
+      - node1:my-node1
+      - node2:my-node2
+  node1:
+    build: nodes/.
+    container_name: my-node1
+    links:
+      - redis
+    ports:
+      - "9090"
+  node2:
+    build: nodes/.
+    container_name: my-node2
+    links:
+      - redis
+    ports:
+      - "9090"
+  redis:
+    image: redis
+    ports:
+      - "6379"
+    container_name: redis-server
