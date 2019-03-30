@@ -5,17 +5,17 @@ services:
     ports:
       - 80:80
     links:
-      - node1:my-node1
-      - node2:my-node2
+      - node1
+      - node2
   node1:
-    build: nodes/.
+    image: moonchild/nodejsapp:v1.0.0
     container_name: my-node1
     links:
       - redis
     ports:
       - "9090"
   node2:
-    build: nodes/.
+    image: moonchild/nodejsapp:v1.0.0
     container_name: my-node2
     links:
       - redis
@@ -24,5 +24,5 @@ services:
   redis:
     image: redis
     ports:
-      - "6379"
+      - 6379:6379
     container_name: redis-server
